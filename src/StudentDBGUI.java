@@ -470,6 +470,49 @@ rs.getString(6));
         }
     }
 }
+
+private void displaytable() {
+        try {
+            myconnection();
+            DefaultTableModel model=(DefaultTableModel) mytable.getModel();
+            //DefaulTableModel model = (DefaultTableModel) mytable.getModel();
+            model.setRowCount(0);
+            
+            while(rs.next()){
+                String mydata[]={rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)};
+                model.addRow(mydata);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentDBGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+       
+    }
+
+    private void tabledata() {
+        DefaultTableModel model=(DefaultTableModel) mytable.getModel();
+        
+        int nrow=mytable.getSelectedRow();
+        
+        firstname.setText(model.getValueAt(nrow,0).toString());
+        lastname.setText(model.getValueAt(nrow,1).toString());
+        gender.setText(model.getValueAt(nrow,2).toString());
+        idnumber.setText(model.getValueAt(nrow,3).toString());
+        major.setText(model.getValueAt(nrow,4).toString());
+        fees.setText(model.getValueAt(nrow,5).toString());
+    }
+
+    private void printtable() {
+        try {
+            displaytable();
+            mytable.print();
+        } catch (PrinterException ex) {
+            Logger.getLogger(StudentDBGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
+
                 
     
 
